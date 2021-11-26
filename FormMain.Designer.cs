@@ -52,6 +52,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button20 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // button0
@@ -248,7 +251,7 @@
             this.labelEvaluationValue.Location = new System.Drawing.Point(428, 234);
             this.labelEvaluationValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEvaluationValue.Name = "labelEvaluationValue";
-            this.labelEvaluationValue.Size = new System.Drawing.Size(191, 350);
+            this.labelEvaluationValue.Size = new System.Drawing.Size(191, 50);
             this.labelEvaluationValue.TabIndex = 15;
             this.labelEvaluationValue.Text = "Status";
             // 
@@ -257,18 +260,18 @@
             this.button15.Location = new System.Drawing.Point(431, 565);
             this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(185, 50);
+            this.button15.Size = new System.Drawing.Size(152, 50);
             this.button15.TabIndex = 16;
-            this.button15.Text = "Fit/Predict";
+            this.button15.Text = "Fit";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(798, 565);
+            this.button16.Location = new System.Drawing.Point(590, 441);
             this.button16.Margin = new System.Windows.Forms.Padding(4);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(133, 50);
+            this.button16.Size = new System.Drawing.Size(143, 41);
             this.button16.TabIndex = 17;
             this.button16.Text = "regen";
             this.button16.UseVisualStyleBackColor = true;
@@ -276,7 +279,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(635, 565);
+            this.button17.Location = new System.Drawing.Point(590, 565);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(143, 50);
             this.button17.TabIndex = 21;
@@ -286,14 +289,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(711, 12);
+            this.textBox1.Location = new System.Drawing.Point(431, 347);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(152, 22);
             this.textBox1.TabIndex = 22;
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(711, 41);
+            this.button18.Location = new System.Drawing.Point(431, 385);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(151, 41);
             this.button18.TabIndex = 23;
@@ -303,12 +306,45 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(712, 123);
+            this.button19.Location = new System.Drawing.Point(432, 441);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(151, 41);
             this.button19.TabIndex = 24;
             this.button19.Text = "Train set from file";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(431, 521);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(151, 22);
+            this.numericUpDown1.TabIndex = 25;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(588, 511);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(145, 41);
+            this.button20.TabIndex = 26;
+            this.button20.Text = "Get from file";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // FormMain
             // 
@@ -317,6 +353,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(961, 683);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.textBox1);
@@ -344,6 +382,7 @@
             this.Location = new System.Drawing.Point(15, 15);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,5 +417,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button20;
     }
 }

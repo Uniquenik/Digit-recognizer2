@@ -37,7 +37,7 @@ namespace neural_networks_kubsu.NeuralNetwork
 
         public enum InitType
         {
-            GET, SET, WORKSET
+            GET, SET, WORKSET, SETLOCAL
         }
 
         public void Files(InitType mode, int index, double [][] weights, INeuron [] neurons, double lastneurons) {
@@ -84,7 +84,7 @@ namespace neural_networks_kubsu.NeuralNetwork
         public void Initialize(InitType mode, IWeightsInitializer weightsInitializer)
         {
             _layers[0].PreviousLayer = _inputLayer;
-            if (mode == InitType.SET)
+            if (mode == InitType.SET || mode == InitType.SETLOCAL)
             {
                 _layers[0].Weights = weightsInitializer.Initialize(
                     _inputLayer.Neurons.Length,
@@ -101,12 +101,11 @@ namespace neural_networks_kubsu.NeuralNetwork
                 }
                 _layers[0].Weights = weights;
             }
-
-            Files(mode, 0, _layers[0].Weights, _layers[0].Neurons, 15);
+            if (mode != InitType.SETLOCAL) Files(mode, 0, _layers[0].Weights, _layers[0].Neurons, 15);
             
             for (var layerIndex = 1; layerIndex < _layers.Count; layerIndex++)
             {
-                if (mode == InitType.SET)
+                if (mode == InitType.SET || mode == InitType.SETLOCAL)
                 {
                     _layers[layerIndex].Weights = weightsInitializer.Initialize(
                         _layers[layerIndex - 1].Neurons.Length,
@@ -114,6 +113,7 @@ namespace neural_networks_kubsu.NeuralNetwork
                         layerIndex + 1
                     );
                 }
+
                 else if (mode == InitType.GET)
                 {
                     var weights = new double[_layers[layerIndex].Neurons.Length][];
@@ -123,7 +123,7 @@ namespace neural_networks_kubsu.NeuralNetwork
                     }
                     _layers[layerIndex].Weights = weights;
                 }
-                Files(mode, layerIndex, _layers[layerIndex].Weights, _layers[layerIndex].Neurons, _layers[layerIndex - 1].Neurons.Length);
+                if (mode != InitType.SETLOCAL) Files(mode, layerIndex, _layers[layerIndex].Weights, _layers[layerIndex].Neurons, _layers[layerIndex - 1].Neurons.Length);
             }
 
             for (var layerIndex = 0; layerIndex < _layers.Count - 1; layerIndex++)
