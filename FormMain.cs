@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using neural_networks_kubsu.NeuralNetwork.ActivationFunction;
+using neural_networks_kubsu.NeuralNetwork.ActivationFunction.SigmoidActivationFunction;
+using neural_networks_kubsu.NeuralNetwork.ActivationFunction.SoftMaxActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.TanhActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.LossFunction.EuclideanDistanceLoss;
 using neural_networks_kubsu.NeuralNetwork.WeightsInitializer.DefaultWeightsInitializer;
@@ -17,6 +20,8 @@ namespace neural_networks_kubsu
         private readonly double[] _inputArray = new double[15];
 
         public static Label LabelNeurons;
+        public static Label LabelCount;
+        public static Label LabelEp;
         public static TextBox TextTrain;
         public static NumericUpDown Count;
         private NeuralNetwork.NeuralNetwork _nn;
@@ -135,7 +140,22 @@ namespace neural_networks_kubsu
             LabelNeurons = labelEvaluationValue;
             TextTrain = textBox1;
             Count = numericUpDown1;
+            LabelCount = label1;
+            LabelEp = label2;
             CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
+        }
+        private void CreateNeuralNetwork(InitType type)
+        {
+            _nn = Builder()
+                .InputLayer(15)
+                .HiddenLayer(73, new TanhActivationFunction())
+                .HiddenLayer(33, new TanhActivationFunction())
+                .OutputLayer(10, new SigmoidActivationFunction())
+                .LossFunction(new EuclideanDistanceLoss())
+                .Build();
+            _nn.Initialize(type, new DefaultWeightsInitializer());
+            Predict();
+            Evaluate();
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -146,28 +166,13 @@ namespace neural_networks_kubsu
 
         private void Fit()
         {
-            _nn.Fit(_inputData, _outputData, Convert.ToInt32(Count.Value) , 0.01);
+            _nn.Fit(_inputData, _outputData, Convert.ToInt32(Count.Value), 0.01);
             Predict();
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
             CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
-            //_nn.Initialize(NeuralNetwork.NeuralNetwork.InitType.SET, new DefaultWeightsInitializer());
-        }
-
-        private void CreateNeuralNetwork(InitType type)
-        {
-            _nn = Builder()
-                .InputLayer(15)
-                .HiddenLayer(73, new TanhActivationFunction())
-                .HiddenLayer(33, new TanhActivationFunction())
-                .OutputLayer(10, new TanhActivationFunction())
-                .LossFunction(new EuclideanDistanceLoss())
-                .Build();
-            _nn.Initialize(type, new DefaultWeightsInitializer());
-            Predict();
-            Evaluate();
         }
 
         private void Evaluate()
@@ -183,7 +188,6 @@ namespace neural_networks_kubsu
             {
                 s += i + ": " + prediction[i] + "\n";
             }
-
             if (InvokeRequired)
             {
                 Invoke(new Action(() =>
@@ -316,9 +320,10 @@ namespace neural_networks_kubsu
             elementintemp1.AppendChild(texttemp);
             elementtemp.AppendChild(elementintemp1);
             elementtemp.AppendChild(elementintemp2);
-            //elementtemp.AppendChild(texttemp);
             el1.AppendChild(elementtemp);
             memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
+            var count = memory_doc.SelectNodes("sets/set").Count;
+            label1.Text = "Data count: "+count.ToString();
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -331,17 +336,26 @@ namespace neural_networks_kubsu
 
         private void button19_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                setTrainData(openFileDialog1.FileName);
+            }
+            //setTrainData("data_set.xml");
+        }
+
+        private void setTrainData(string name) {
             XmlDocument memory_doc = new XmlDocument();
-            if (!File.Exists(System.IO.Path.Combine("Resources", $"data_set.xml")))
+            if (!File.Exists(System.IO.Path.Combine("Resources", name)))
             {
                 XmlElement element1 = memory_doc.CreateElement("", "sets", "");
                 memory_doc.AppendChild(element1);
-                memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+                memory_doc.Save(System.IO.Path.Combine("Resources", name));
+                memory_doc.Load(System.IO.Path.Combine("Resources", name));
             }
             else
             {
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+                memory_doc.Load(System.IO.Path.Combine("Resources", name));
             }
             var count = memory_doc.SelectNodes("sets/set").Count;
             _inputData = new double[count][];
@@ -350,19 +364,23 @@ namespace neural_networks_kubsu
             Array.Clear(_outputData, 0, count);
             XmlElement memory_el = memory_doc.DocumentElement;
             //MessageBox.Show(memory_el.ChildNodes.Item(0).LastChild.InnerText.ToString());
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 _outputData[i] = memory_el.ChildNodes.Item(i).LastChild.InnerText.Split(' ').Select(double.Parse).ToArray();
                 _inputData[i] = memory_el.ChildNodes.Item(i).FirstChild.InnerText.Split(' ').Select(double.Parse).ToArray();
             }
+            LabelCount.Text = count.ToString();
 
-           /* XmlElement memory_el = memory_doc.DocumentElement;
-            for (int l = 0; l < weights.GetLength(0); ++l)
-                for (int k = 0; k < weights[0].GetLength(0); ++k)
-                {
+        }
 
-                    weights[l][k] = double.Parse(memory_el.ChildNodes.Item(k + weights[0].Length * l).InnerText.Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
-                }*/
-            //_inputData.Clear();
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -54,6 +54,8 @@
             this.button19 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button20 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -248,19 +250,19 @@
             // 
             // labelEvaluationValue
             // 
-            this.labelEvaluationValue.Location = new System.Drawing.Point(428, 234);
+            this.labelEvaluationValue.Location = new System.Drawing.Point(429, 234);
             this.labelEvaluationValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEvaluationValue.Name = "labelEvaluationValue";
-            this.labelEvaluationValue.Size = new System.Drawing.Size(191, 50);
+            this.labelEvaluationValue.Size = new System.Drawing.Size(185, 33);
             this.labelEvaluationValue.TabIndex = 15;
             this.labelEvaluationValue.Text = "Status";
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(431, 565);
+            this.button15.Location = new System.Drawing.Point(590, 506);
             this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(152, 50);
+            this.button15.Size = new System.Drawing.Size(149, 50);
             this.button15.TabIndex = 16;
             this.button15.Text = "Fit";
             this.button15.UseVisualStyleBackColor = true;
@@ -268,20 +270,20 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(590, 441);
+            this.button16.Location = new System.Drawing.Point(588, 441);
             this.button16.Margin = new System.Windows.Forms.Padding(4);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(143, 41);
+            this.button16.Size = new System.Drawing.Size(151, 41);
             this.button16.TabIndex = 17;
-            this.button16.Text = "regen";
+            this.button16.Text = "New weights";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(590, 565);
+            this.button17.Location = new System.Drawing.Point(431, 581);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(143, 50);
+            this.button17.Size = new System.Drawing.Size(151, 34);
             this.button17.TabIndex = 21;
             this.button17.Text = "Save in file";
             this.button17.UseVisualStyleBackColor = true;
@@ -289,16 +291,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(431, 347);
+            this.textBox1.Location = new System.Drawing.Point(432, 365);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(152, 22);
+            this.textBox1.Size = new System.Drawing.Size(150, 22);
             this.textBox1.TabIndex = 22;
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(431, 385);
+            this.button18.Location = new System.Drawing.Point(432, 393);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(151, 41);
+            this.button18.Size = new System.Drawing.Size(150, 41);
             this.button18.TabIndex = 23;
             this.button18.Text = "Add in train set";
             this.button18.UseVisualStyleBackColor = true;
@@ -331,20 +333,38 @@
             this.numericUpDown1.Size = new System.Drawing.Size(151, 22);
             this.numericUpDown1.TabIndex = 25;
             this.numericUpDown1.Value = new decimal(new int[] {
-            1000,
+            500,
             0,
             0,
             0});
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(588, 511);
+            this.button20.Location = new System.Drawing.Point(588, 581);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(145, 41);
+            this.button20.Size = new System.Drawing.Size(151, 34);
             this.button20.TabIndex = 26;
             this.button20.Text = "Get from file";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(428, 334);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 17);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(428, 267);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(146, 19);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Ep: ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // FormMain
             // 
@@ -353,6 +373,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(961, 683);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button19);
@@ -419,5 +441,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -54,6 +54,9 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="NeuralNetwork\ActivationFunction\IActivationFunction.cs" />
+    <Compile Include="NeuralNetwork\ActivationFunction\LeakyReLUActivationFunction\LeakyReLUActivationFunction.cs" />
+    <Compile Include="NeuralNetwork\ActivationFunction\SigmoidActivationFunction\SigmoidActivationFunction.cs" />
+    <Compile Include="NeuralNetwork\ActivationFunction\SoftMaxActivationFunction\SoftMaxActivationFunction.cs" />
     <Compile Include="NeuralNetwork\ActivationFunction\TanhActivationFunction\TanhActivationFunction.cs" />
     <Compile Include="NeuralNetwork\Layer\AbstractLayer.cs" />
     <Compile Include="NeuralNetwork\Layer\HiddenLayer\HiddenLayer.cs" />

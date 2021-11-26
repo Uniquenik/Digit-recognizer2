@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction;
-using neural_networks_kubsu.NeuralNetwork.Layer;
 using neural_networks_kubsu.NeuralNetwork.Layer.HiddenLayer;
 using neural_networks_kubsu.NeuralNetwork.Layer.InputLayer;
 using neural_networks_kubsu.NeuralNetwork.Layer.OutputLayer;
@@ -42,16 +38,17 @@ namespace neural_networks_kubsu.NeuralNetwork
 
         public void Files(InitType mode, int index, double [][] weights, INeuron [] neurons, double lastneurons) {
             XmlDocument memory_doc = new XmlDocument();
-            if (!File.Exists(System.IO.Path.Combine("Resources", $"{index}_memory.xml")))
+            string name = $"{index}_layer_memory.xml";
+            if (!File.Exists(System.IO.Path.Combine("Resources", name)))
             {
                 XmlElement element1 = memory_doc.CreateElement("", "Weights", "");
                 memory_doc.AppendChild(element1);
-                memory_doc.Save(System.IO.Path.Combine("Resources", $"{index}_memory.xml"));
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"{index}_memory.xml"));
+                memory_doc.Save(System.IO.Path.Combine("Resources", name));
+                memory_doc.Load(System.IO.Path.Combine("Resources", name));
             }
             else
             {
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"{index}_memory.xml"));
+                memory_doc.Load(System.IO.Path.Combine("Resources", name));
             }
             if (mode == InitType.GET)
             {
@@ -78,7 +75,7 @@ namespace neural_networks_kubsu.NeuralNetwork
                     }
                 }
             }
-            memory_doc.Save(System.IO.Path.Combine("Resources", $"{index}_memory.xml"));
+            memory_doc.Save(System.IO.Path.Combine("Resources", name));
         }
 
         public void Initialize(InitType mode, IWeightsInitializer weightsInitializer)
@@ -170,10 +167,10 @@ namespace neural_networks_kubsu.NeuralNetwork
                     ComputeDelta(outputBatch[i]);
                     CorrectWeights(learningRate);
                 }
-
                 if (epoch % 10 == 0)
                 {
-                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = Evaluate(inputBatch, outputBatch).ToString(); });  
+                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelEp.Text = "Ep: " + epoch.ToString(); });
+                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = "Loss: " + Evaluate(inputBatch, outputBatch).ToString(); });  
                 }
             }
         }
@@ -228,21 +225,6 @@ namespace neural_networks_kubsu.NeuralNetwork
 
             public NeuralNetwork Build()
             {
-                if (_instance._inputLayer == null)
-                {
-                    throw new Exception("InputLayer not provided");
-                }
-
-                if (_instance.OutputLayer == null)
-                {
-                    throw new Exception("OutputLayer not provided");
-                }
-
-                if (_instance._lossFunction == null)
-                {
-                    throw new Exception("LossFunction not provided");
-                }
-
                 return _instance;
             }
         }

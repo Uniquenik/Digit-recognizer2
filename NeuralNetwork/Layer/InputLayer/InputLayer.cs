@@ -16,7 +16,7 @@ namespace neural_networks_kubsu.NeuralNetwork.Layer.InputLayer
         {
             for (var i = 0; i < inputData.Length; i++)
             {
-                ((InputNeuron) Neurons[i]).ActivationValue = inputData[i];
+                ((IInputNeuron) Neurons[i]).ActivationValue = inputData[i];
             }
         }
     }
