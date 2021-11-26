@@ -176,7 +176,6 @@ namespace neural_networks_kubsu
                 s += i + ": " + prediction[i] + "\n";
             }
 
-
             if (InvokeRequired)
             {
                 Invoke(new Action(() =>
