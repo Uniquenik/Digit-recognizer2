@@ -51,6 +51,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button0
@@ -199,7 +200,7 @@
             // 
             // labelStatus
             // 
-            this.labelStatus.Location = new System.Drawing.Point(459, 11);
+            this.labelStatus.Location = new System.Drawing.Point(428, 9);
             this.labelStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(191, 203);
@@ -244,7 +245,7 @@
             // 
             // labelEvaluationValue
             // 
-            this.labelEvaluationValue.Location = new System.Drawing.Point(459, 235);
+            this.labelEvaluationValue.Location = new System.Drawing.Point(428, 234);
             this.labelEvaluationValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEvaluationValue.Name = "labelEvaluationValue";
             this.labelEvaluationValue.Size = new System.Drawing.Size(191, 350);
@@ -253,8 +254,8 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(463, 588);
-            this.button15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button15.Location = new System.Drawing.Point(431, 565);
+            this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(185, 50);
             this.button15.TabIndex = 16;
@@ -264,10 +265,10 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(687, 591);
-            this.button16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button16.Location = new System.Drawing.Point(798, 565);
+            this.button16.Margin = new System.Windows.Forms.Padding(4);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(120, 47);
+            this.button16.Size = new System.Drawing.Size(133, 50);
             this.button16.TabIndex = 17;
             this.button16.Text = "regen";
             this.button16.UseVisualStyleBackColor = true;
@@ -275,29 +276,39 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(657, 8);
+            this.button17.Location = new System.Drawing.Point(635, 565);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(75, 37);
+            this.button17.Size = new System.Drawing.Size(143, 50);
             this.button17.TabIndex = 21;
-            this.button17.Text = "Save";
+            this.button17.Text = "Save in file";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(780, 8);
+            this.textBox1.Location = new System.Drawing.Point(711, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(152, 22);
             this.textBox1.TabIndex = 22;
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(780, 36);
+            this.button18.Location = new System.Drawing.Point(711, 41);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(151, 41);
             this.button18.TabIndex = 23;
             this.button18.Text = "Add in train set";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(712, 123);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(151, 41);
+            this.button19.TabIndex = 24;
+            this.button19.Text = "Train set from file";
+            this.button19.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -305,7 +316,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1233, 683);
+            this.ClientSize = new System.Drawing.Size(961, 683);
+            this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button17);
@@ -330,7 +342,7 @@
             this.Controls.Add(this.button0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Location = new System.Drawing.Point(15, 15);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -365,5 +377,6 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }

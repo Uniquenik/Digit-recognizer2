@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.TanhActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.LossFunction.EuclideanDistanceLoss;
 using neural_networks_kubsu.NeuralNetwork.WeightsInitializer.DefaultWeightsInitializer;
@@ -14,6 +16,7 @@ namespace neural_networks_kubsu
         private readonly double[] _inputArray = new double[15];
 
         public static Label LabelNeurons;
+        public static TextBox TextTrain;
         private NeuralNetwork.NeuralNetwork _nn;
 
         private readonly double[][] _inputData =
@@ -128,6 +131,7 @@ namespace neural_networks_kubsu
         {
             InitializeComponent();
             LabelNeurons = labelEvaluationValue;
+            TextTrain = textBox1;
             CreateNeuralNetwork();
         }
 
@@ -276,6 +280,39 @@ namespace neural_networks_kubsu
         private void button17_Click(object sender, EventArgs e)
         {
             _nn.Initialize(NeuralNetwork.NeuralNetwork.InitType.WORKSET, new DefaultWeightsInitializer());
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            XmlDocument memory_doc = new XmlDocument();
+            if (!File.Exists(System.IO.Path.Combine("Resources", $"data_set.xml")))
+            {
+                XmlElement element1 = memory_doc.CreateElement("", "sets", "");
+                memory_doc.AppendChild(element1);
+                memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
+                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+            }
+            else
+            {
+                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+            }
+            XmlNode el1 = memory_doc.FirstChild;
+            XmlElement elementtemp = memory_doc.CreateElement(string.Empty, "set", string.Empty);
+            XmlElement elementintemp = memory_doc.CreateElement(string.Empty, "answer", string.Empty);
+            //double[] outputData = new double[10];
+            string outputData = "";
+            for (int i = 0; i <= 9; i++) {
+                if (i == Convert.ToInt32(TextTrain.Text))
+                    outputData += " " + 1.0.ToString();
+                else outputData += " " + 0.0.ToString();
+            }
+            XmlText textintemp = memory_doc.CreateTextNode(outputData);
+            elementintemp.AppendChild(textintemp);
+            XmlText texttemp = memory_doc.CreateTextNode(string.Join(" ", _inputArray));
+            elementtemp.AppendChild(elementintemp);
+            elementtemp.AppendChild(texttemp);
+            el1.AppendChild(elementtemp);
+            memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
         }
     }
 }
