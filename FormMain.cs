@@ -152,8 +152,8 @@ namespace neural_networks_kubsu
         {
             _nn = NeuralNetwork.NeuralNetwork.Builder()
                 .InputLayer(15)
-                .HiddenLayer(76, new TanhActivationFunction())
-                .HiddenLayer(36, new TanhActivationFunction())
+                .HiddenLayer(73, new TanhActivationFunction())
+                .HiddenLayer(33, new TanhActivationFunction())
                 .OutputLayer(10, new TanhActivationFunction())
                 .LossFunction(new EuclideanDistanceLoss())
                 .Build();
