@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.Layer.HiddenLayer;
@@ -159,18 +160,31 @@ namespace neural_networks_kubsu.NeuralNetwork
 
         public void Fit(double[][] inputBatch, double[][] outputBatch, int epochs, double learningRate)
         {
-            for (var epoch = 0; epoch < epochs; epoch++)
+            
+           /* Series ser;
+            FormMain.Chart1.Series.Invoke((Action)delegate
+            {
+                string[] seriesArray = { "chart" };
+                Series ser = FormMain.Chart1.Series.Add(seriesArray[0]);
+                FormMain.Chart1.Series["chart"].LegendText = "sas";
+            });*/
+            
+                for (var epoch = 0; epoch < epochs; epoch++)
             {
                 for (var i = 0; i < inputBatch.Length; i++)
                 {
-                    Predict(inputBatch[i]);
-                    ComputeDelta(outputBatch[i]);
+                    var rand = new Random();
+                    int index = rand.Next(inputBatch.GetLength(0)); 
+                    Predict(inputBatch[index]);
+                    ComputeDelta(outputBatch[index]);
                     CorrectWeights(learningRate);
                 }
                 if (epoch % 10 == 0)
                 {
+                    double ev = Evaluate(inputBatch, outputBatch);
+                    FormMain.Chart1.Invoke((Action)delegate { FormMain.Chart1.Series["chart"].Points.AddXY(epoch+10, ev); });
                     FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelEp.Text = "Ep: " + epoch.ToString(); });
-                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = "Loss: " + Evaluate(inputBatch, outputBatch).ToString(); });  
+                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = "Loss: " + ev.ToString(); });  
                 }
             }
         }

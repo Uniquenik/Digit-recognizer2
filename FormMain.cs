@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.SigmoidActivationFunction;
-using neural_networks_kubsu.NeuralNetwork.ActivationFunction.SoftMaxActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.TanhActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.LossFunction.EuclideanDistanceLoss;
 using neural_networks_kubsu.NeuralNetwork.WeightsInitializer.DefaultWeightsInitializer;
@@ -24,7 +24,10 @@ namespace neural_networks_kubsu
         public static Label LabelEp;
         public static TextBox TextTrain;
         public static NumericUpDown Count;
+        public static Chart Chart1;
+        public static Series ser;
         private NeuralNetwork.NeuralNetwork _nn;
+        private string addTrainFile = null;
 
         private double[][] _inputData =
         {
@@ -142,6 +145,7 @@ namespace neural_networks_kubsu
             Count = numericUpDown1;
             LabelCount = label1;
             LabelEp = label2;
+            Chart1 = chart1;
             CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
         }
         private void CreateNeuralNetwork(InitType type)
@@ -166,7 +170,25 @@ namespace neural_networks_kubsu
 
         private void Fit()
         {
-            _nn.Fit(_inputData, _outputData, Convert.ToInt32(Count.Value), 0.01);
+            string[] seriesArray = { "chart" };
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    ser = Chart1.Series.Add(seriesArray[0]);
+                    Chart1.Series["chart"].LegendText = "sas";
+                    Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
+                    Chart1.Palette = ChartColorPalette.Chocolate;
+                }));
+            }
+            else
+            {
+                ser = Chart1.Series.Add(seriesArray[0]);
+                Chart1.Series["chart"].LegendText = "sas";
+                Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
+                Chart1.Palette = ChartColorPalette.Chocolate;
+            }
+            _nn.Fit(_inputData, _outputData, Convert.ToInt32(Count.Value), 0.05);
             Predict();
         }
 
@@ -291,17 +313,25 @@ namespace neural_networks_kubsu
 
         private void button18_Click(object sender, EventArgs e)
         {
+            if (addTrainFile == null) {
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    addTrainFile = openFileDialog1.FileName;
+                }
+            }
+
             XmlDocument memory_doc = new XmlDocument();
-            if (!File.Exists(System.IO.Path.Combine("Resources", $"data_set.xml")))
+            if (!File.Exists(System.IO.Path.Combine("Resources",addTrainFile)))
             {
                 XmlElement element1 = memory_doc.CreateElement("", "sets", "");
                 memory_doc.AppendChild(element1);
-                memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+                memory_doc.Save(System.IO.Path.Combine("Resources", addTrainFile));
+                memory_doc.Load(System.IO.Path.Combine("Resources", addTrainFile));
             }
             else
             {
-                memory_doc.Load(System.IO.Path.Combine("Resources", $"data_set.xml"));
+                memory_doc.Load(System.IO.Path.Combine("Resources", addTrainFile));
             }
             XmlNode el1 = memory_doc.FirstChild;
             XmlElement elementtemp = memory_doc.CreateElement(string.Empty, "set", string.Empty);
@@ -321,7 +351,7 @@ namespace neural_networks_kubsu
             elementtemp.AppendChild(elementintemp1);
             elementtemp.AppendChild(elementintemp2);
             el1.AppendChild(elementtemp);
-            memory_doc.Save(System.IO.Path.Combine("Resources", $"data_set.xml"));
+            memory_doc.Save(System.IO.Path.Combine("Resources", addTrainFile));
             var count = memory_doc.SelectNodes("sets/set").Count;
             label1.Text = "Data count: "+count.ToString();
         }
@@ -373,12 +403,25 @@ namespace neural_networks_kubsu
 
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                addTrainFile = openFileDialog1.FileName;
+            }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
         }
