@@ -29,9 +29,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,6 +61,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button21 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -211,10 +212,10 @@
             // 
             // labelStatus
             // 
-            this.labelStatus.Location = new System.Drawing.Point(428, 9);
+            this.labelStatus.Location = new System.Drawing.Point(576, 422);
             this.labelStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(191, 203);
+            this.labelStatus.Size = new System.Drawing.Size(234, 193);
             this.labelStatus.TabIndex = 12;
             this.labelStatus.Text = "Prediction";
             // 
@@ -256,19 +257,21 @@
             // 
             // labelEvaluationValue
             // 
-            this.labelEvaluationValue.Location = new System.Drawing.Point(429, 234);
+            this.labelEvaluationValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelEvaluationValue.Location = new System.Drawing.Point(701, 390);
             this.labelEvaluationValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEvaluationValue.Name = "labelEvaluationValue";
-            this.labelEvaluationValue.Size = new System.Drawing.Size(185, 33);
+            this.labelEvaluationValue.Size = new System.Drawing.Size(200, 29);
             this.labelEvaluationValue.TabIndex = 15;
             this.labelEvaluationValue.Text = "Status";
+            this.labelEvaluationValue.Click += new System.EventHandler(this.labelEvaluationValue_Click);
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(590, 506);
+            this.button15.Location = new System.Drawing.Point(417, 422);
             this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(149, 50);
+            this.button15.Size = new System.Drawing.Size(151, 50);
             this.button15.TabIndex = 16;
             this.button15.Text = "Fit";
             this.button15.UseVisualStyleBackColor = true;
@@ -276,10 +279,10 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(588, 441);
+            this.button16.Location = new System.Drawing.Point(417, 581);
             this.button16.Margin = new System.Windows.Forms.Padding(4);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(151, 41);
+            this.button16.Size = new System.Drawing.Size(151, 34);
             this.button16.TabIndex = 17;
             this.button16.Text = "New weights";
             this.button16.UseVisualStyleBackColor = true;
@@ -287,7 +290,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(431, 581);
+            this.button17.Location = new System.Drawing.Point(417, 492);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(151, 34);
             this.button17.TabIndex = 21;
@@ -297,16 +300,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(432, 365);
+            this.textBox1.Location = new System.Drawing.Point(908, 390);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(150, 22);
             this.textBox1.TabIndex = 22;
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(432, 393);
+            this.button18.Location = new System.Drawing.Point(904, 422);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(150, 41);
+            this.button18.Size = new System.Drawing.Size(151, 50);
             this.button18.TabIndex = 23;
             this.button18.Text = "Add in train set";
             this.button18.UseVisualStyleBackColor = true;
@@ -314,7 +317,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(432, 441);
+            this.button19.Location = new System.Drawing.Point(904, 581);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(151, 41);
             this.button19.TabIndex = 24;
@@ -324,7 +327,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(431, 521);
+            this.numericUpDown1.Location = new System.Drawing.Point(417, 390);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -347,7 +350,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(588, 581);
+            this.button20.Location = new System.Drawing.Point(417, 532);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(151, 34);
             this.button20.TabIndex = 26;
@@ -357,7 +360,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(428, 334);
+            this.label1.Location = new System.Drawing.Point(905, 492);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 17);
             this.label1.TabIndex = 27;
@@ -366,16 +369,17 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(428, 267);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(575, 390);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 19);
+            this.label2.Size = new System.Drawing.Size(116, 29);
             this.label2.TabIndex = 28;
-            this.label2.Text = "Ep: ";
+            this.label2.Text = "Ep: 00000";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(588, 393);
+            this.button21.Location = new System.Drawing.Point(905, 525);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(151, 41);
             this.button21.TabIndex = 29;
@@ -385,19 +389,29 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(626, 0);
+            chartArea12.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.chart1.Legends.Add(legend12);
+            this.chart1.Location = new System.Drawing.Point(417, 0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(454, 300);
+            series12.ChartArea = "ChartArea1";
+            series12.Legend = "Legend1";
+            series12.Name = "Series1";
+            this.chart1.Series.Add(series12);
+            this.chart1.Size = new System.Drawing.Size(639, 369);
             this.chart1.TabIndex = 30;
             this.chart1.Text = "chart1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(829, 417);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 55);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "N";
             // 
             // FormMain
             // 
@@ -405,7 +419,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1114, 683);
+            this.ClientSize = new System.Drawing.Size(1061, 637);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.label2);
@@ -481,5 +496,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label label3;
     }
 }

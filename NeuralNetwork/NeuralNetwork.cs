@@ -160,16 +160,8 @@ namespace neural_networks_kubsu.NeuralNetwork
 
         public void Fit(double[][] inputBatch, double[][] outputBatch, int epochs, double learningRate)
         {
-            
-           /* Series ser;
-            FormMain.Chart1.Series.Invoke((Action)delegate
-            {
-                string[] seriesArray = { "chart" };
-                Series ser = FormMain.Chart1.Series.Add(seriesArray[0]);
-                FormMain.Chart1.Series["chart"].LegendText = "sas";
-            });*/
-            
-                for (var epoch = 0; epoch < epochs; epoch++)
+            FormMain.Chart1.Invoke((Action)delegate { FormMain.Chart1.Series["chart"].Points.Clear(); });
+            for (var epoch = 0; epoch < epochs; epoch++)
             {
                 for (var i = 0; i < inputBatch.Length; i++)
                 {
@@ -184,7 +176,7 @@ namespace neural_networks_kubsu.NeuralNetwork
                     double ev = Evaluate(inputBatch, outputBatch);
                     FormMain.Chart1.Invoke((Action)delegate { FormMain.Chart1.Series["chart"].Points.AddXY(epoch+10, ev); });
                     FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelEp.Text = "Ep: " + epoch.ToString(); });
-                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = "Loss: " + ev.ToString(); });  
+                    FormMain.LabelNeurons.Invoke((Action)delegate { FormMain.LabelNeurons.Text = "Loss: " + Math.Round(ev, 5).ToString(); });  
                 }
             }
         }

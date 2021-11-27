@@ -21,6 +21,7 @@ namespace neural_networks_kubsu
 
         public static Label LabelNeurons;
         public static Label LabelCount;
+        public static Label LabelAnswer;
         public static Label LabelEp;
         public static TextBox TextTrain;
         public static NumericUpDown Count;
@@ -145,6 +146,7 @@ namespace neural_networks_kubsu
             Count = numericUpDown1;
             LabelCount = label1;
             LabelEp = label2;
+            LabelAnswer = label3;
             Chart1 = chart1;
             CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
         }
@@ -171,22 +173,29 @@ namespace neural_networks_kubsu
         private void Fit()
         {
             string[] seriesArray = { "chart" };
-            if (InvokeRequired)
+            if (ser == null)
             {
-                Invoke(new Action(() =>
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(() =>
+                    {
+                        ser = Chart1.Series.Add(seriesArray[0]);
+                        Chart1.Series["chart"].LegendText = "sas";
+                        Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
+                        Chart1.Palette = ChartColorPalette.Pastel;
+                        Chart1.Series[0].IsVisibleInLegend = false;
+                        Chart1.Series["chart"].IsVisibleInLegend = false;
+                    }));
+                }
+                else
                 {
                     ser = Chart1.Series.Add(seriesArray[0]);
                     Chart1.Series["chart"].LegendText = "sas";
                     Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
-                    Chart1.Palette = ChartColorPalette.Chocolate;
-                }));
-            }
-            else
-            {
-                ser = Chart1.Series.Add(seriesArray[0]);
-                Chart1.Series["chart"].LegendText = "sas";
-                Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
-                Chart1.Palette = ChartColorPalette.Chocolate;
+                    Chart1.Palette = ChartColorPalette.Pastel;
+                    Chart1.Series[0].IsVisibleInLegend = false;
+                    Chart1.Series["chart"].IsVisibleInLegend = false;
+                }
             }
             _nn.Fit(_inputData, _outputData, Convert.ToInt32(Count.Value), 0.05);
             Predict();
@@ -205,21 +214,26 @@ namespace neural_networks_kubsu
         private void Predict()
         {
             var prediction = _nn.Predict(_inputArray);
-            var s = "Prediction:\n";
+            var s = "";
             for (var i = 0; i < 10; i++)
             {
                 s += i + ": " + prediction[i] + "\n";
             }
+            string ans = "N";
+            if (prediction.Max() > 0.05) ans = Array.IndexOf(prediction, prediction.Max()).ToString();
+
             if (InvokeRequired)
             {
                 Invoke(new Action(() =>
                 {
                     labelStatus.Text = s;
+                    LabelAnswer.Text = ans;
                 }));
             }
             else
             {
                 labelStatus.Text = s;
+                LabelAnswer.Text = ans;
             }      
         }
 
@@ -393,7 +407,6 @@ namespace neural_networks_kubsu
             _outputData = new double[count][];
             Array.Clear(_outputData, 0, count);
             XmlElement memory_el = memory_doc.DocumentElement;
-            //MessageBox.Show(memory_el.ChildNodes.Item(0).LastChild.InnerText.ToString());
             for (int i = 0; i < count; i++)
             {
                 _outputData[i] = memory_el.ChildNodes.Item(i).LastChild.InnerText.Split(' ').Select(double.Parse).ToArray();
@@ -422,6 +435,11 @@ namespace neural_networks_kubsu
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelEvaluationValue_Click(object sender, EventArgs e)
         {
 
         }
