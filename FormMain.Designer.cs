@@ -29,9 +29,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -62,6 +62,7 @@
             this.button21 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label3 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -307,7 +308,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(904, 422);
+            this.button18.Location = new System.Drawing.Point(908, 422);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(151, 50);
             this.button18.TabIndex = 23;
@@ -317,9 +318,9 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(904, 581);
+            this.button19.Location = new System.Drawing.Point(908, 581);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(151, 41);
+            this.button19.Size = new System.Drawing.Size(151, 34);
             this.button19.TabIndex = 24;
             this.button19.Text = "Train set from file";
             this.button19.UseVisualStyleBackColor = true;
@@ -360,7 +361,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(905, 492);
+            this.label1.Location = new System.Drawing.Point(907, 372);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 17);
             this.label1.TabIndex = 27;
@@ -379,9 +380,9 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(905, 525);
+            this.button21.Location = new System.Drawing.Point(908, 532);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(151, 41);
+            this.button21.Size = new System.Drawing.Size(151, 34);
             this.button21.TabIndex = 29;
             this.button21.Text = "Change file for add";
             this.button21.UseVisualStyleBackColor = true;
@@ -389,16 +390,16 @@
             // 
             // chart1
             // 
-            chartArea12.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.chart1.Legends.Add(legend12);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(417, 0);
             this.chart1.Name = "chart1";
-            series12.ChartArea = "ChartArea1";
-            series12.Legend = "Legend1";
-            series12.Name = "Series1";
-            this.chart1.Series.Add(series12);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(639, 369);
             this.chart1.TabIndex = 30;
             this.chart1.Text = "chart1";
@@ -413,6 +414,16 @@
             this.label3.TabIndex = 31;
             this.label3.Text = "N";
             // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(908, 492);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(151, 34);
+            this.button22.TabIndex = 32;
+            this.button22.Text = "New default file";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -420,6 +431,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1061, 637);
+            this.Controls.Add(this.button22);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.button21);
@@ -497,5 +509,6 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button22;
     }
 }

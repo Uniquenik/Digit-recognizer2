@@ -9,6 +9,8 @@ namespace neural_networks_kubsu.NeuralNetwork.Layer.HiddenLayer
         public ILayer NextLayer { get; set; }
         public double[][] Weights { get; set; }
 
+        public double alpha = 0.1;
+
         public HiddenLayer(int units) : base(units)
         {
         }
@@ -46,7 +48,8 @@ namespace neural_networks_kubsu.NeuralNetwork.Layer.HiddenLayer
                 {
                     computedDelta += NextLayer.Neurons[j].Delta * NextLayer.Neurons[j].Weights[i];
                 }
-                Neurons[i].Delta = computedDelta * ActivationFunction.Derivative(Neurons[i].NeuronValue);
+                if (i == 0) Neurons[i].Delta = computedDelta * ActivationFunction.Derivative(Neurons[i].NeuronValue);
+                else Neurons[i].Delta = alpha * Neurons[i-1].Delta * computedDelta * ActivationFunction.Derivative(Neurons[i].NeuronValue);
             }
         }
     }

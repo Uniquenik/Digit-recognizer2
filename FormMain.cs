@@ -182,7 +182,10 @@ namespace neural_networks_kubsu
                         ser = Chart1.Series.Add(seriesArray[0]);
                         Chart1.Series["chart"].LegendText = "sas";
                         Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
-                        Chart1.Palette = ChartColorPalette.Pastel;
+                        Chart1.Series["chart"].BorderWidth = 3;
+                        Chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+                        Chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+                        Chart1.Palette = ChartColorPalette.Excel;
                         Chart1.Series[0].IsVisibleInLegend = false;
                         Chart1.Series["chart"].IsVisibleInLegend = false;
                     }));
@@ -192,7 +195,10 @@ namespace neural_networks_kubsu
                     ser = Chart1.Series.Add(seriesArray[0]);
                     Chart1.Series["chart"].LegendText = "sas";
                     Chart1.Series["chart"].ChartType = SeriesChartType.Spline;
-                    Chart1.Palette = ChartColorPalette.Pastel;
+                    Chart1.Series["chart"].BorderWidth = 3;
+                    Chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+                    Chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.DashDot;
+                    Chart1.Palette = ChartColorPalette.Excel;
                     Chart1.Series[0].IsVisibleInLegend = false;
                     Chart1.Series["chart"].IsVisibleInLegend = false;
                 }
@@ -220,7 +226,7 @@ namespace neural_networks_kubsu
                 s += i + ": " + prediction[i] + "\n";
             }
             string ans = "N";
-            if (prediction.Max() > 0.05) ans = Array.IndexOf(prediction, prediction.Max()).ToString();
+            if (prediction.Max() > 0.2) ans = Array.IndexOf(prediction, prediction.Max()).ToString();
 
             if (InvokeRequired)
             {
@@ -442,6 +448,11 @@ namespace neural_networks_kubsu
         private void labelEvaluationValue_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            addTrainFile = "Data_set.xml";
         }
     }
 }
