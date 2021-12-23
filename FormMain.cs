@@ -6,7 +6,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
-using neural_networks_kubsu.NeuralNetwork.ActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.SigmoidActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.ActivationFunction.TanhActivationFunction;
 using neural_networks_kubsu.NeuralNetwork.LossFunction.EuclideanDistanceLoss;
@@ -23,6 +22,8 @@ namespace neural_networks_kubsu
         public static Label LabelCount;
         public static Label LabelAnswer;
         public static Label LabelEp;
+        public static Label LabelFileName;
+        public static Label LabelFileTrain;
         public static TextBox TextTrain;
         public static NumericUpDown Count;
         public static Chart Chart1;
@@ -147,6 +148,8 @@ namespace neural_networks_kubsu
             LabelCount = label1;
             LabelEp = label2;
             LabelAnswer = label3;
+            LabelFileName = label4;
+            LabelFileTrain = label5;
             Chart1 = chart1;
             CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
         }
@@ -209,7 +212,7 @@ namespace neural_networks_kubsu
 
         private void button16_Click(object sender, EventArgs e)
         {
-            CreateNeuralNetwork(NeuralNetwork.NeuralNetwork.InitType.SETLOCAL);
+            CreateNeuralNetwork(InitType.SETLOCAL);
         }
 
         private void Evaluate()
@@ -373,7 +376,7 @@ namespace neural_networks_kubsu
             el1.AppendChild(elementtemp);
             memory_doc.Save(System.IO.Path.Combine("Resources", addTrainFile));
             var count = memory_doc.SelectNodes("sets/set").Count;
-            label1.Text = "Data count: "+count.ToString();
+            label1.Text = count.ToString()+" train images";
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -390,8 +393,8 @@ namespace neural_networks_kubsu
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 setTrainData(openFileDialog1.FileName);
+                LabelFileTrain.Text = "Train from: "+openFileDialog1.FileName;
             }
-            //setTrainData("data_set.xml");
         }
 
         private void setTrainData(string name) {
@@ -418,7 +421,7 @@ namespace neural_networks_kubsu
                 _outputData[i] = memory_el.ChildNodes.Item(i).LastChild.InnerText.Split(' ').Select(double.Parse).ToArray();
                 _inputData[i] = memory_el.ChildNodes.Item(i).FirstChild.InnerText.Split(' ').Select(double.Parse).ToArray();
             }
-            LabelCount.Text = count.ToString();
+            LabelCount.Text = count.ToString()+" train images";
 
         }
 
@@ -428,6 +431,7 @@ namespace neural_networks_kubsu
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 addTrainFile = openFileDialog1.FileName;
+                LabelFileName.Text = "Add data in: " + addTrainFile;
             }
         }
         private void label1_Click(object sender, EventArgs e)
@@ -452,7 +456,16 @@ namespace neural_networks_kubsu
 
         private void button22_Click(object sender, EventArgs e)
         {
-            addTrainFile = "Data_set.xml";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "XML (*.xml)|*.xml";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                addTrainFile = saveFileDialog1.FileName;
+                LabelFileName.Text = "Add data in: "+addTrainFile;
+            }
         }
     }
 }
